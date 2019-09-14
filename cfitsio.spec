@@ -4,9 +4,9 @@
 #
 Name     : cfitsio
 Version  : 1
-Release  : 1
-URL      : http://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio3450.tar.gz
-Source0  : http://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio3450.tar.gz
+Release  : 2
+URL      : https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio3450.tar.gz
+Source0  : https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio3450.tar.gz
 Summary  : A library of C and Fortran subroutines for reading and writing data files in FITS (Flexible Image Transport System) data format
 Group    : Development/Tools
 License  : ISC
@@ -29,6 +29,7 @@ Summary: dev components for the cfitsio package.
 Group: Development
 Requires: cfitsio-lib = %{version}-%{release}
 Provides: cfitsio-devel = %{version}-%{release}
+Requires: cfitsio = %{version}-%{release}
 
 %description dev
 dev components for the cfitsio package.
@@ -58,16 +59,21 @@ license components for the cfitsio package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1548116187
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1568420784
 mkdir -p clr-build
 pushd clr-build
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 %cmake ..
-make  %{?_smp_mflags}
+make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1548116187
+export SOURCE_DATE_EPOCH=1568420784
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cfitsio
 cp License.txt %{buildroot}/usr/share/package-licenses/cfitsio/License.txt
@@ -80,7 +86,20 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
-/usr/include/*.h
+/usr/include/cfortran.h
+/usr/include/drvrgsiftp.h
+/usr/include/drvrsmem.h
+/usr/include/eval_defs.h
+/usr/include/eval_tab.h
+/usr/include/f77_wrap.h
+/usr/include/fitsio.h
+/usr/include/fitsio2.h
+/usr/include/fpack.h
+/usr/include/group.h
+/usr/include/grparser.h
+/usr/include/longnam.h
+/usr/include/region.h
+/usr/include/simplerng.h
 /usr/lib64/libcfitsio.so
 
 %files lib
