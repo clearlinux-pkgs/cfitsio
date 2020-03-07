@@ -1,3 +1,4 @@
-Configure miss: do we have flock_t defined in sys/fcntl.h
-Configure miss: do we have flock_t defined in sys/flock.h
-Configure miss: do we have union semun defined
+Configure miss: whether flock_t is defined in sys/fcntl.h
+Configure miss: whether flock_t is defined in sys/flock.h
+Configure miss: whether union semun is defined
+Configure miss: drvrnet.c:1261:13: warning: format not a string literal and no format arguments [-Wformat-security]
