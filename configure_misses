@@ -1,0 +1,3 @@
+Configure miss: do we have flock_t defined in sys/fcntl.h
+Configure miss: do we have flock_t defined in sys/flock.h
+Configure miss: do we have union semun defined

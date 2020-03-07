@@ -4,16 +4,19 @@
 #
 Name     : cfitsio
 Version  : 1
-Release  : 2
+Release  : 3
 URL      : https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio3450.tar.gz
 Source0  : https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio3450.tar.gz
-Summary  : A library of C and Fortran subroutines for reading and writing data files in FITS (Flexible Image Transport System) data format
+Summary  : FITS File Subroutine Library
 Group    : Development/Tools
 License  : ISC
 Requires: cfitsio-lib = %{version}-%{release}
 Requires: cfitsio-license = %{version}-%{release}
 BuildRequires : buildreq-cmake
+BuildRequires : buildreq-configure
 BuildRequires : curl-dev
+BuildRequires : nghttp2-dev
+BuildRequires : openssl-dev
 
 %description
 CFITSIO Interface Library
@@ -54,59 +57,46 @@ license components for the cfitsio package.
 
 %prep
 %setup -q -n cfitsio
+cd %{_builddir}/cfitsio
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1568420784
-mkdir -p clr-build
-pushd clr-build
+export SOURCE_DATE_EPOCH=1583540213
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
 export FFLAGS="$CFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
-%cmake ..
-make  %{?_smp_mflags} VERBOSE=1
-popd
+%configure --disable-static
+make  %{?_smp_mflags}  shared
 
 %install
-export SOURCE_DATE_EPOCH=1568420784
+export SOURCE_DATE_EPOCH=1583540213
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/cfitsio
-cp License.txt %{buildroot}/usr/share/package-licenses/cfitsio/License.txt
-pushd clr-build
+cp %{_builddir}/cfitsio/License.txt %{buildroot}/usr/share/package-licenses/cfitsio/c287787ea3432b806844ccb7571d6b8e3cd4a7ef
 %make_install
-popd
 
 %files
 %defattr(-,root,root,-)
 
 %files dev
 %defattr(-,root,root,-)
-/usr/include/cfortran.h
-/usr/include/drvrgsiftp.h
 /usr/include/drvrsmem.h
-/usr/include/eval_defs.h
-/usr/include/eval_tab.h
-/usr/include/f77_wrap.h
 /usr/include/fitsio.h
 /usr/include/fitsio2.h
-/usr/include/fpack.h
-/usr/include/group.h
-/usr/include/grparser.h
 /usr/include/longnam.h
-/usr/include/region.h
-/usr/include/simplerng.h
 /usr/lib64/libcfitsio.so
+/usr/lib64/pkgconfig/cfitsio.pc
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/libcfitsio.so.3
-/usr/lib64/libcfitsio.so.3.45
+/usr/lib64/libcfitsio.so.7
+/usr/lib64/libcfitsio.so.7.3.45
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/cfitsio/License.txt
+/usr/share/package-licenses/cfitsio/c287787ea3432b806844ccb7571d6b8e3cd4a7ef
