@@ -1,0 +1,2 @@
+# Skip older integer releases in favor of major.minor
+regex_ban = ^[0-9]+$
