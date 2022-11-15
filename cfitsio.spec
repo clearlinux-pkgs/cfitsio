@@ -4,7 +4,7 @@
 #
 Name     : cfitsio
 Version  : 4.2.0
-Release  : 9
+Release  : 10
 URL      : https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio-4.2.0.tar.gz
 Source0  : https://heasarc.gsfc.nasa.gov/FTP/software/fitsio/c/cfitsio-4.2.0.tar.gz
 Summary  : FITS File Subroutine Library
