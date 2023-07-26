@@ -1,3 +1,6 @@
 Configure miss: whether flock_t is defined in sys/fcntl.h
+Configure miss: whether flock_t is defined in sys/fcntl.h
 Configure miss: whether flock_t is defined in sys/flock.h
+Configure miss: whether flock_t is defined in sys/flock.h
+Configure miss: whether union semun is defined
 Configure miss: whether union semun is defined
