@@ -1007,6 +1007,7 @@ libcfitsio.so.10:fits_iter_set_iotype
 libcfitsio.so.10:fits_make_hist
 libcfitsio.so.10:fits_make_histd
 libcfitsio.so.10:fits_make_histde
+libcfitsio.so.10:fits_make_longstr_key_util
 libcfitsio.so.10:fits_net_timeout
 libcfitsio.so.10:fits_parser_allocateCol
 libcfitsio.so.10:fits_parser_set_temporary_col
